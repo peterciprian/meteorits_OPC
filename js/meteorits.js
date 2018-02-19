@@ -75,9 +75,11 @@ function successAjax(xhttp) {
         }
         createTable();
     }
+    calculate();
 
     function calculate() {
         var result = [];
+        result.sum = 0;
         result.min = datas[0];
         result.max = datas[0];
         result.avg = datas[0];
@@ -90,26 +92,27 @@ function successAjax(xhttp) {
             if (datas[i].mass > result.max.mass) {
                 result.max = datas[i];
             }
-            result.db += datas[i].mass;
+            result.sum += datas[i].mass;
         }
-        result.avg = result.db / datas.length;
+        result.avg = result.sum / datas.length;
 
         var min = document.createElement("P");
         min.setAttribute('class', 'min');
-        min.setAttribute('innertext', result.min);
+        min.setAttribute('innertext', result.min.mass);
         document.body.appendChild(min);
 
         var max = document.createElement("P");
         max.setAttribute('class', 'max');
-        max.setAttribute('innertext', result.max);
+        max.setAttribute('innertext', result.max.mass);
         document.body.appendChild(max);
 
         var avg = document.createElement("P");
         avg.setAttribute('class', 'avg');
-        avg.setAttribute('innertext', result.avg);
+        avg.setAttribute('innertext', result.avg.mass);
         document.body.appendChild(avg);
+        console.log(result);
     }
-    calculate();
+
 
     /////////////////////////////////////////////////////////////////////////////////////////
     // Live servert használd mindig
